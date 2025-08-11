@@ -6,8 +6,9 @@ from PIL import Image
 from matrix_config import matrix
 
 class GifViewer():
-    def __init__(self, image_file):
+    def __init__(self, image_file, run_time=float('inf')):
         self.image_file = image_file
+        self.run_time = run_time # in seconds, infinity by default
         self.canvases = []
         self.num_frames = 0
 
@@ -47,7 +48,9 @@ class GifViewer():
 
             # Infinitely loop through the gif
             cur_frame = 0
-            while(True):
+            end_time = time.time() + self.run_time
+
+            while time.time() <= end_time:
                 matrix.SwapOnVSync(self.canvases[cur_frame], framerate_fraction=10)
                 if cur_frame == self.num_frames - 1:
                     cur_frame = 0
