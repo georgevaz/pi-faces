@@ -9,6 +9,9 @@ load_dotenv()
 api = os.getenv('OLLAMA_API')
 
 def sendRequest(query):
+    if not query:
+        raise ValueError("Query must contain at least one character.")
+
     payload = {
         "model": os.getenv('MODEL'),
         "messages": [{"role": "user", "content": query}],
