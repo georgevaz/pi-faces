@@ -3,6 +3,8 @@ import os
 from dotenv import load_dotenv
 
 from ollama_request import sendRequest
+from speech.speech import run_speech_recognition
+
 # from gif_viewer import GifViewer
 
 if __name__ == "__main__":
@@ -13,11 +15,11 @@ if __name__ == "__main__":
     # gif_viewer = GifViewer(gif)
     # gif_viewer.run()
 
-
     try:
         active = True
         while(active):
-            user_input = input("Enter prompt: ")
+            user_input = run_speech_recognition()
+            # user_input = input("Enter prompt: ")
             if user_input == "quit":
                 print("Closing session.")
                 active = False
